@@ -1,18 +1,18 @@
-const { Mongoose } = require('mongoose');
-const User = require('../models/user');
+const mongoose = require('mongoose');
+const UserModel = require('../models/user');
 
 
 
 module.exports = {
     createUser: async(user) => {
-        const user = new User({
-            _id: new Mongoose.Types.ObjectId();
+        const newUser = new UserModel({
+            _id: new mongoose.Types.ObjectId(),
             name: user
         })
        
         try{
-            const newUser = await user.save();
-            return newUser; 
+            const newUserSaved = await newUser.save();
+            return newUserSaved; 
         } catch (error){
             throw error
         }
