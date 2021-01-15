@@ -2,12 +2,15 @@ const express = require('express'),
   users = require('./api/routes/users');
 const app = express();
 const cors = require('cors');
+const db = require('./database');
 
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(cors());
 app.use(express.static('public'));
+app.use(users);
 
+db._connect;
 
 
 app.get('/', (req, res) => {
@@ -15,10 +18,7 @@ app.get('/', (req, res) => {
 });
 
 
-app.use(users);
-// app.post('/api/exercise/new-user',(req,res)=>{
-//   res.send('Stub')
-// })
+
 
 
 module.exports = app;

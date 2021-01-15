@@ -9,6 +9,5 @@ const listener = app.listen(3000, () => {
 
 /*
 MONGO_URI=mongodb+srv://m001-student:HU62sQ20FWKERV0w@sandbox.bvkcb.mongodb.net/fccExerciseTracker?retryWrites=true&w=majority
-
 */
 
