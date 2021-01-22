@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const UserModel = require('../models/user');
 
-
-
 module.exports = {
     createUser: async(user) => {
         const newUser = new UserModel({
