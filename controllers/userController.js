@@ -15,6 +15,16 @@ module.exports = {
             throw error
         }
     
+    },
+    getAllUsers: async()=>{
+        try{
+            const usersList = await UserModel.find({});
+            return usersList;
+        } catch(error){
+            console.log(error);
+            throw error
+        }
+
     }
 
 }

@@ -1,5 +1,7 @@
 const server = require('../app');
 const chai = require('chai');
+const assertArrays = require('chai-arrays');
+chai.use(assertArrays);
 const chaiHttp = require('chai-http');
 const expect = chai.expect;
 
@@ -34,8 +36,22 @@ describe('POST username',()=>{
     });
 });
 
+describe('GET all users',()=>{
+    it('GET request to api/exercise/users to get an array of all users. Each element in array is an obect containing a users username and _id',
+    (done)=>{
+        chai.request(server)
+            .get('api/exercise/users')
+            .end((err,res)=>{
+                expect(res).to.have.status(200);
+                expect(res).to.be.array();
+                done();
+            });
+    })
+});
 
-     
+
+// You can make a GET request to api/exercise/users to get an array of all users.
+//  Each element in the array is an object containing a user's username and _id.  
 
 
 
@@ -52,6 +68,7 @@ https://www.google.com/search?q=deplying+your+nodejs+app+on+google+cloud&oq=depl
 
 You can POST to /api/exercise/new-user with form data username to create a new user.
  The returned response will be an object with username and _id properties.
+ DONE
 
 You can make a GET request to api/exercise/users to get an array of all users.
  Each element in the array is an object containing a user's username and _id.
