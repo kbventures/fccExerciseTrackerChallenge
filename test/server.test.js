@@ -3,21 +3,22 @@ const chai = require('chai');
 const assertArrays = require('chai-arrays');
 chai.use(assertArrays);
 const chaiHttp = require('chai-http');
+const { get } = require('../api/routes/users');
 const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-// describe('/', ()=>{
-//     it('/ should return 200',(done)=>{
-//         chai.request(server)
-//         .get('/')
-//         .end((err, res)=>{
+describe('/', ()=>{
+    it('/ should return 200',(done)=>{
+        chai.request(server)
+        .get('/')
+        .end((err, res)=>{
         
-//             expect(res).to.have.status(200);
-//             done();
-//         });
-//     });
-// });
+            expect(res).to.have.status(200);
+            done();
+        });
+    });
+});
 
 describe('POST username',()=>{
     it('POST response should be a an object with username and _id properties and status 200',(done)=>{
@@ -36,18 +37,45 @@ describe('POST username',()=>{
     });
 });
 
-describe('GET all users',()=>{
-    it('GET request to api/exercise/users to get an array of all users. Each element in array is an obect containing a users username and _id',
-    (done)=>{
-        chai.request(server)
-            .get('api/exercise/users')
-            .end((err,res)=>{
-                expect(res).to.have.status(200);
-                expect(res).to.be.array();
-                done();
-            });
-    })
-});
+// describe('GET all users',()=>{
+//     it('GET request to api/exercise/users to get an array of all users. Each element in array is an obect containing a users username and _id',
+//     (done)=>{
+//         chai.request(server)
+//             .get('/api/exercise/users')
+//             .end((err,res)=>{
+//                 expect(res).to.have.status(200);
+//                 // expect(res).to.be.array();
+//                 done();
+//             });
+//     })
+// });
+
+
+// {"_id":"5ffd82a8c5b5cf05d0805d5d","username":"kbzzz","date":"Tue Jan 26 2021","duration":60,"description":"ffffff"}
+// describe('POST /api/exercise/add', ()=>{
+//     it('POST /api/exercise/add with form data userId=_id, description, duration and optionally date', (done)=>{
+//     let newExercise = {
+//         userId:'600ae57d21012681a19af1d4',
+//         description:'Math Exercise',
+//         duration:'60',
+//         date: '2020-12-09'
+//     }
+//     chai.request(server)
+//         .post('/api/exercise/add')
+//         .send(newExercise)
+//         .end((err,res)=>{
+//             console.log('Is working');
+//             console.log(res);
+//             done();
+//         });
+//     });
+// });
+
+
+
+// You can POST to /api/exercise/add with form data userId=_id, description, duration,
+//  and optionally date. If no date is supplied, the current date will be used. 
+//  The response returned will be the user object with the exercise fields added.
 
 
 // You can make a GET request to api/exercise/users to get an array of all users.
@@ -72,6 +100,12 @@ You can POST to /api/exercise/new-user with form data username to create a new u
 
 You can make a GET request to api/exercise/users to get an array of all users.
  Each element in the array is an object containing a user's username and _id.
+ DONE.
+
+ Testing for GET all users:
+ DONE
+
+
 
 You can POST to /api/exercise/add with form data userId=_id, description, duration,
  and optionally date. If no date is supplied, the current date will be used. 
