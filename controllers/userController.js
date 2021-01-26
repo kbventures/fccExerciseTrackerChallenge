@@ -39,7 +39,10 @@ module.exports = {
     getAllUsers: async()=>{
         try{
             const usersList = await UserModel.find({});
-            return usersList;
+            const arrayWith_idsAndNamesOnly = usersList.map(({_id:id,name:user}) => ({id,user}));
+            
+            console.log(arrayWith_idsAndNamesOnly);
+            return arrayWith_idsAndNamesOnly;
         } catch(error){
             console.log(error);
             throw error
