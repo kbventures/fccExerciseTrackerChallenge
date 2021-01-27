@@ -72,6 +72,18 @@ describe('POST username',()=>{
 // });
 
 
+// https://stackoverflow.com/questions/58745945/mongoose-unique-field-error-message-handling
+
+/*
+
+https://github.com/academind/node-restful-api-tutorial/blob/05-add-mongodb-and-mongoose/api/routes/products.js
+https://zellwk.com/blog/mongoose-subdocuments/
+https://zellwk.com/blog/mongoose/
+https://stackoverflow.com/questions/58745945/mongoose-unique-field-error-message-handling
+https://zellwk.com/blog/mongoose-population/
+
+*/
+
 
 // You can POST to /api/exercise/add with form data userId=_id, description, duration,
 //  and optionally date. If no date is supplied, the current date will be used. 

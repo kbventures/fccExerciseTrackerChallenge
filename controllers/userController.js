@@ -3,18 +3,25 @@ const UserModel = require('../models/user');
 const UserLogModel = require('../models/userLog');
 const ExerciseModel = require('../models/exercise');
 
+
 module.exports = {
-    createUser: async(user) => {
+    createUser: async(req,res) => {
+        console.log(req.body.username);
         const newUser = new UserModel({
             _id: new mongoose.Types.ObjectId(),
-            name: user,
+            name: req.body.username,
             log:[]
         })
        
         try{
+            const userExist = await UserModel.findOne({name: req.body.username})
+            // if(userExist) return 'Username already taken';
+            if(!userExist){
             const newUserSaved = await newUser.save();
             const _idAndNameOnly = {_id:newUserSaved._id, name: newUserSaved.name};
             return _idAndNameOnly; 
+        }
+            return res.status(400).send("User already taken");
 
         } catch (error){
             throw error

@@ -1,5 +1,5 @@
 const express = require('express'),
-  users = require('./api/routes/users');
+  users = require('./api/routes/usersApi');
 const app = express();
 const cors = require('cors');
 const db = require('./database');

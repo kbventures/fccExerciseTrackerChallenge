@@ -3,8 +3,8 @@ const router = express.Router();
 const userController = require('../../controllers/userController');
 
 router.post('/api/exercise/new-user', async (req,res)=>{
-    const newUser = await userController.createUser(req.body.username);
-    return res.send(newUser);
+    const newUser = await userController.createUser(req,res);
+    return newUser;
 })
 
 router.post('/api/exercise/add', async(req,res)=>{
