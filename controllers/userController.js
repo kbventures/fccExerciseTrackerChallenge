@@ -6,7 +6,7 @@ const ExerciseModel = require('../models/exercise');
 
 module.exports = {
     createUser: async(req,res) => {
-        console.log(req.body.username);
+        
         const newUser = new UserModel({
             _id: new mongoose.Types.ObjectId(),
             name: req.body.username,
@@ -17,11 +17,12 @@ module.exports = {
             const userExist = await UserModel.findOne({name: req.body.username})
             // if(userExist) return 'Username already taken';
             if(!userExist){
+            console.log('doesnt exist');
             const newUserSaved = await newUser.save();
-            const _idAndNameOnly = {_id:newUserSaved._id, name: newUserSaved.name};
-            return _idAndNameOnly; 
+            const _idAndNameOnly = { username: newUserSaved.name,_id:newUserSaved._id};
+            return res.send(_idAndNameOnly); 
         }
-            return res.status(400).send("User already taken");
+            return res.status(400).send('Username already taken');
 
         } catch (error){
             throw error

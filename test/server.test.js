@@ -3,32 +3,33 @@ const chai = require('chai');
 const assertArrays = require('chai-arrays');
 chai.use(assertArrays);
 const chaiHttp = require('chai-http');
-const { get } = require('../api/routes/users');
+const { get } = require('../api/routes/usersApi');
 const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-describe('/', ()=>{
-    it('/ should return 200',(done)=>{
-        chai.request(server)
-        .get('/')
-        .end((err, res)=>{
+// describe('/', ()=>{
+//     it('/ should return 200',(done)=>{
+//         chai.request(server)
+//         .get('/')
+//         .end((err, res)=>{
         
-            expect(res).to.have.status(200);
-            done();
-        });
-    });
-});
+//             expect(res).to.have.status(200);
+//             done();
+//         });
+//     });
+// });
 
-describe('POST username',()=>{
-    it('POST response should be a an object with username and _id properties and status 200',(done)=>{
+describe('POST NEW username',()=>{
+    it('POST NEW response should be a an object with username and _id properties and status 200',(done)=>{
         let newuserpost = {
-            username: 'asdf123'
+            username: 'asd4534566asdf7878zzz0'
         }
         chai.request(server)
             .post('/api/exercise/new-user')
             .send(newuserpost)
             .end((err,res)=>{
+                // console.log(res);
                 expect(res).to.have.status(200);
                 expect(res).to.be.an('object');
                 expect(res.body).that.includes.keys('_id','name');
@@ -36,6 +37,14 @@ describe('POST username',()=>{
             });
     });
 });
+
+// describe('POST name that is not unique '), ()=>{
+//     it('POST name taht is not unique'), (done)=>{
+//         chai.request(server)
+//             .post('/api/exercise/new')
+
+//     }
+// }
 
 // describe('GET all users',()=>{
 //     it('GET request to api/exercise/users to get an array of all users. Each element in array is an obect containing a users username and _id',

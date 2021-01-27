@@ -9,7 +9,7 @@ router.post('/api/exercise/new-user', async (req,res)=>{
 
 router.post('/api/exercise/add', async(req,res)=>{
     const newExercise = await userController.createExercise(req.body);
-    return res.send(newExercise);
+    return res.json(newExercise);
 })
 
 
