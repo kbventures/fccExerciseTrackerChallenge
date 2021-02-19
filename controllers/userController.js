@@ -15,19 +15,33 @@ module.exports = {
        
         try{
             const userExist = await UserModel.findOne({name: req.body.username})
-            // if(userExist) return 'Username already taken';
+         
             if(!userExist){
-            console.log('doesnt exist');
+          
             const newUserSaved = await newUser.save();
             const _idAndNameOnly = { username: newUserSaved.name,_id:newUserSaved._id};
             return res.send(_idAndNameOnly); 
         }
-            return res.status(400).send('Username already taken');
+            
+            return res.status(400).send({error:'Username already taken'});
 
         } catch (error){
             throw error
         }
     
+    },
+    getAllUsers: async()=>{
+        try{
+            const usersList = await UserModel.find({});
+            const arrayWith_idsAndNamesOnly = usersList.map(({_id:id,name:user}) => ({id,user}));
+            
+            console.log(arrayWith_idsAndNamesOnly);
+            return arrayWith_idsAndNamesOnly;
+        } catch(error){
+            console.log(error);
+            throw error
+        }
+
     },
     createExercise: async(exercise)=>{
         const newExercise = new ExerciseModel({
@@ -43,19 +57,6 @@ module.exports = {
         } catch(error){
             throw error
         }
-    },
-    getAllUsers: async()=>{
-        try{
-            const usersList = await UserModel.find({});
-            const arrayWith_idsAndNamesOnly = usersList.map(({_id:id,name:user}) => ({id,user}));
-            
-            console.log(arrayWith_idsAndNamesOnly);
-            return arrayWith_idsAndNamesOnly;
-        } catch(error){
-            console.log(error);
-            throw error
-        }
-c
     }
 
 }
