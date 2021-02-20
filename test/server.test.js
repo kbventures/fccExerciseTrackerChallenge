@@ -6,6 +6,7 @@ const chaiHttp = require('chai-http');
 const { get } = require('../api/routes/usersApi');
 const expect = chai.expect;
 
+
 chai.use(chaiHttp);
 
 // describe('/', ()=>{
@@ -22,39 +23,40 @@ chai.use(chaiHttp);
 
 describe('POST NEW username',()=>{
     it('POST NEW response should be a an object with username and _id properties and status 200',(done)=>{
-        let newuserpost = {
+        let newUserPost = {
             username: 'id' + (new Date()).getTime()
         }
         chai.request(server)
             .post('/api/exercise/new-user')
-            .send(newuserpost)
+            .send(newUserPost)
             .end((err,res)=>{
-                // console.log(res);
                 expect(res).to.have.status(200);
                 expect(res).to.be.an('object');
                 expect(res.body).that.includes.keys('_id','username');
+                expect(res.body.username).to.equals(newUserPost.username);
                 done();
             });
     });
 });
 
 
-describe('POST NEW username which already exists',()=>{
-    it('POST NEW response is Username already taken',(done)=>{
-        let newuserpost = {
-            username: 'asd45345saf66aadf7878zzz0'
-        }
-        chai.request(server)
-            .post('/api/exercise/new-user')
-            .send(newuserpost)
-            .end((err,res)=>{
-                expect(res).to.have.status(400);
-                expect(res).to.be.an('object');
-                expect(res.body).that.includes.keys('error');
-                done();
-            });
-    });
-});
+// describe('POST NEW username which already exists',()=>{
+//     it('POST NEW response is Username already taken',(done)=>{
+//         let newuserpost = {
+//             username: 'asd45345saf66aadf7878zzz0'
+//         }
+//         chai.request(server)
+//             .post('/api/exercise/new-user')
+//             .send(newuserpost)
+//             .end((err,res)=>{
+//                 expect(res).to.have.status(400);
+//                 expect(res).to.be.an('object');
+//                 expect(res.body).that.includes.keys('error');
+//                 expect(res.body.error).to.equals("Username already taken");
+//                 done();
+//             });
+//     });
+// });
 
 
 
@@ -66,7 +68,6 @@ describe('POST NEW username which already exists',()=>{
 //             .get('/api/exercise/users')
 //             .end((err,res)=>{
 //                 expect(res).to.have.status(200);
-//                 // expect(res).to.be.array();
 //                 done();
 //             });
 //     })
@@ -74,24 +75,31 @@ describe('POST NEW username which already exists',()=>{
 
 
 // {"_id":"5ffd82a8c5b5cf05d0805d5d","username":"kbzzz","date":"Tue Jan 26 2021","duration":60,"description":"ffffff"}
+// {"_id":"60301e42e2f17305e4681ab2","username":"tizzy1234","date":"Fri Feb 19 2021","duration":60,"description":"testing"}
+
 // describe('POST /api/exercise/add', ()=>{
 //     it('POST /api/exercise/add with form data userId=_id, description, duration and optionally date', (done)=>{
 //     let newExercise = {
-//         userId:'600ae57d21012681a19af1d4',
-//         description:'Math Exercise',
+//         userId:'5ffd82a8c5b5cf05d0805d5d',
+//         description:'Math Exam',
 //         duration:'60',
-//         date: '2020-12-09'
+//         date: ''
 //     }
 //     chai.request(server)
 //         .post('/api/exercise/add')
 //         .send(newExercise)
 //         .end((err,res)=>{
-//             console.log('Is working');
-//             console.log(res);
+//             // console.log(res.body);
+//             expect(res).to.have.status(200);
+//             // expect(res).to.be.an('object');
+//             // expect(res.body).that.includes.keys("_id","description","duration","date");
+//             // expect(res.body._id).to.equals("60302b2525572038b674b402");
 //             done();
 //         });
 //     });
 // });
+
+
 
 
 // https://stackoverflow.com/questions/58745945/mongoose-unique-field-error-message-handling
