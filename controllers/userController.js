@@ -18,12 +18,16 @@ module.exports = {
         })
        
         try{
+            console.log(newUser);
             const userExist = await UserModel.findOne({username: req.body.username})
             if(!userExist){
-          
-            const newUserSaved = await newUser.save();
-            const _idAndNameOnly = { username: newUserSaved.username,_id:newUserSaved._id};
-            return res.send(_idAndNameOnly); 
+    
+            // const newUserSaved = 
+            await newUser.save();
+            // const _idAndNameOnly = { username: newUserSaved.username,_id:newUserSaved._id};
+            // console.log(_idAndNameOnly);
+            console.log(newUser);
+            return res.send(newUser); 
         }
             
             return res.status(400).send({error:'Username already taken'});
@@ -36,8 +40,10 @@ module.exports = {
     getAllUsers: async()=>{
         try{
             const usersList = await UserModel.find({});
+            console.log(usersList);
             const arrayWith_idsAndNamesOnly = usersList.map(({_id:id,username:user}) => ({id,user}));
-            return arrayWith_idsAndNamesOnly;
+            // console.log(arrayWith_idsAndNamesOnly);
+            return usersList;
         } catch(error){
             throw error
         }
