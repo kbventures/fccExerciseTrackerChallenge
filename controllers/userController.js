@@ -24,10 +24,10 @@ module.exports = {
     
             // const newUserSaved = 
             await newUser.save();
-            // const _idAndNameOnly = { username: newUserSaved.username,_id:newUserSaved._id};
-            // console.log(_idAndNameOnly);
+            const _idAndNameOnly = { username: newUser.username,_id:newUser._id};
+            console.log(_idAndNameOnly);
             console.log(newUser);
-            return res.send(newUser); 
+            return res.send(_idAndNameOnly); 
         }
             
             return res.status(400).send({error:'Username already taken'});
