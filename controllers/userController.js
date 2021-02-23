@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const UserModel = require('../models/user');
 const UserLogModel = require('../models/userLog');
 const ExerciseModel = require('../models/exercise');
+const dayjs = require('dayjs');
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
@@ -44,30 +45,33 @@ module.exports = {
 
     },
     createExercise: async(exercise)=>{
+        const now = dayjs();
         const newExercise = new ExerciseModel({
             description: exercise.description,
             duration: exercise.duration,
             date: exercise.date
         })
-       
-
+        console.log(now.format("dd MMM D YYYY"));
+        if(newExercise.date === null){
+            newExercise.date = now.format('dd MMM D YYYY'); 
+            console.log(newExercise);
+        }
+        
+        // Tu Feb 23 2021
         try{
-            
-            console.log(exercise.userId)
-            const user = await UserModel.findOne({_id: exercise.userId}) 
-            console.log(`Testing ${user}`)
+            const user = await UserModel.findOne({_id: exercise.userId})
             user.log.push(newExercise)
             user.save();
             
-            return newExerciseSaved;
-        } catch(error){
-            console.log('haha');
-            console.log(error);
+            return user;
+        } catch(error){;
             throw error
         }
     }
 
 }
+
+// Tu Feb 23 2021
 
 /*
 You can POST to /api/exercise/add with form data userId=_id,

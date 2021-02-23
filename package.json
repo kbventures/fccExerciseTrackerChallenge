@@ -6,10 +6,11 @@
 	"scripts": {
 		"start": "nodemon server.js",
 		"notnodemon": "server.js",
-		"test": "mocha"
+		"test": "mocha --timeout 10000"
 	},
 	"dependencies": {
 		"cors": "^2.8.5",
+		"dayjs": "^1.10.4",
 		"dotenv": "^8.2.0",
 		"express": "^4.16.4",
 		"mongodb": "^3.6.3",

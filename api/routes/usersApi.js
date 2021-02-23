@@ -14,10 +14,12 @@ router.get('/api/exercise/users', async (req, res)=>{
 })
 
 router.post('/api/exercise/add', async(req,res)=>{
-    console.log(req.body);
-    const newExercise = await userController.createExercise(req.body);
-    return res.json(newExercise);
+    const updatedExerciseLise = await userController.createExercise(req.body);
+    return res.status(200).json(updatedExerciseLise);
 })
+
+
+
 
 // {"_id":"5ffd82a8c5b5cf05d0805d5d","username":"kbzzz","date":"Tue Jan 26 2021","duration":60,"description":"ffffff"}
 // {"username":"tizzy1234","_id":"60301e42e2f17305e4681ab2"}
