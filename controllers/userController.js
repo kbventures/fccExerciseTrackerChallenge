@@ -13,17 +13,16 @@ module.exports = {
     createUser: async(req,res) => {
         
         const newUser = new UserModel({
-            name: req.body.username,
+            username: req.body.username,
             log:[]
         })
        
         try{
-            const userExist = await UserModel.findOne({name: req.body.username})
-         
+            const userExist = await UserModel.findOne({username: req.body.username})
             if(!userExist){
           
             const newUserSaved = await newUser.save();
-            const _idAndNameOnly = { username: newUserSaved.name,_id:newUserSaved._id};
+            const _idAndNameOnly = { username: newUserSaved.username,_id:newUserSaved._id};
             return res.send(_idAndNameOnly); 
         }
             
@@ -37,7 +36,7 @@ module.exports = {
     getAllUsers: async()=>{
         try{
             const usersList = await UserModel.find({});
-            const arrayWith_idsAndNamesOnly = usersList.map(({_id:id,name:user}) => ({id,user}));
+            const arrayWith_idsAndNamesOnly = usersList.map(({_id:id,username:user}) => ({id,user}));
             return arrayWith_idsAndNamesOnly;
         } catch(error){
             throw error

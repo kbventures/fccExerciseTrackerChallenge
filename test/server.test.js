@@ -8,17 +8,17 @@ const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-describe('/', ()=>{
-    it('/ should return 200',(done)=>{
-        chai.request(server)
-        .get('/')
-        .end((err, res)=>{
+// describe('/', ()=>{
+//     it('/ should return 200',(done)=>{
+//         chai.request(server)
+//         .get('/')
+//         .end((err, res)=>{
         
-            expect(res).to.have.status(200);
-            done();
-        });
-    });
-});
+//             expect(res).to.have.status(200);
+//             done();
+//         });
+//     });
+// });
 
 describe('POST NEW username',()=>{
     it('POST NEW response should be a an object with username and _id properties and status 200',(done) =>{
@@ -38,40 +38,40 @@ describe('POST NEW username',()=>{
     });
 });
 
-describe('GET all users',()=>{
-    it('GET request to api/exercise/users to get an array of all users. Each element in array is an obect containing a users username and _id',
-    (done)=>{
-        chai.request(server)
-            .get('/api/exercise/users')
-            .end((err,res)=>{
-                expect(res).to.have.status(200);
-                expect(res.body).to.be.an('array');
-                done();
-            });
-    })
-});
+// describe('GET all users',()=>{
+//     it('GET request to api/exercise/users to get an array of all users. Each element in array is an obect containing a users username and _id',
+//     (done)=>{
+//         chai.request(server)
+//             .get('/api/exercise/users')
+//             .end((err,res)=>{
+//                 expect(res).to.have.status(200);
+//                 expect(res.body).to.be.an('array');
+//                 done();
+//             });
+//     })
+// });
 
-describe('POST /api/exercise/add', ()=>{
-    it('POST /api/exercise/add with form data userId=_id, description, duration and optionally date', (done)=>{
-    let newExercise = {
-        userId:'60342792880a132b6cffea5e',
-        description:'Math Exam',
-        duration:'60',
-        date: ''
-    }
-    chai.request(server)
-        .post('/api/exercise/add')
-        .send(newExercise)
-        .end((err,res)=>{
-            console.log(res.body);
-            expect(res).to.have.status(200);
-            expect(res).to.be.an('object');
-            expect(res.body).that.includes.keys("_id","description","duration","date");
-            // expect(res.body._id).to.equals("60342792880a132b6cffea5e");
-            done();
-        });
-    });
-});
+// describe('POST /api/exercise/add', ()=>{
+//     it('POST /api/exercise/add with form data userId=_id, description, duration and optionally date', (done)=>{
+//     let newExercise = {
+//         userId:'60342792880a132b6cffea5e',
+//         description:'Math Exam',
+//         duration:'60',
+//         date: ''
+//     }
+//     chai.request(server)
+//         .post('/api/exercise/add')
+//         .send(newExercise)
+//         .end((err,res)=>{
+//             console.log(res.body);
+//             expect(res).to.have.status(200);
+//             expect(res).to.be.an('object');
+//             expect(res.body).that.includes.keys("_id","description","duration","date");
+//             // expect(res.body._id).to.equals("60342792880a132b6cffea5e");
+//             done();
+//         });
+//     });
+// });
 
 
 
