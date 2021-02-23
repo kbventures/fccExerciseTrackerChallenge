@@ -54,7 +54,7 @@ chai.use(chaiHttp);
 describe('POST /api/exercise/add', ()=>{
     it('POST /api/exercise/add with form data userId=_id, description, duration and optionally date', (done)=>{
     let newExercise = {
-        userId:'6035418a4d43e12af91bd0e9',
+        userId:'603547104350e4357480534e',
         description:'Math Exam',
         duration:'60',
         date: ''
@@ -66,8 +66,8 @@ describe('POST /api/exercise/add', ()=>{
             console.log(res.body);
             expect(res).to.have.status(200);
             expect(res).to.be.an('object');
-            expect(res.body).that.includes.keys("_id","description","duration","date");
-            // expect(res.body._id).to.equals("60342792880a132b6cffea5e");
+            expect(res.body).that.includes.keys("_id","username","description","duration","date");
+            expect(res.body._id).to.equals("603547104350e4357480534e");
             done();
         });
     });

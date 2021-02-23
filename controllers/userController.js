@@ -18,15 +18,15 @@ module.exports = {
         })
        
         try{
-            console.log(newUser);
+            // console.log(newUser);
             const userExist = await UserModel.findOne({username: req.body.username})
             if(!userExist){
     
             // const newUserSaved = 
             await newUser.save();
             const _idAndNameOnly = { username: newUser.username,_id:newUser._id};
-            console.log(_idAndNameOnly);
-            console.log(newUser);
+            // console.log(_idAndNameOnly);
+            // console.log(newUser);
             return res.send(_idAndNameOnly); 
         }
             
@@ -40,7 +40,7 @@ module.exports = {
     getAllUsers: async()=>{
         try{
             const usersList = await UserModel.find({});
-            console.log(usersList);
+            // console.log(usersList);
             const arrayWith_idsAndNamesOnly = usersList.map(({_id:id,username:user}) => ({id,user}));
             // console.log(arrayWith_idsAndNamesOnly);
             return usersList;
@@ -51,17 +51,24 @@ module.exports = {
     },//{"_id":"603541cae2f17305e4681c8c","username":"maxipad1hh",
       //"date":"Tue Feb 23 2021","duration":60,"description":"Horror Phase 2"}
     createExercise: async(exercise)=>{
-        const now = dayjs();
+     
         const newExercise = new ExerciseModel({
             description: exercise.description,
             duration: exercise.duration,
             date: exercise.date
         })
-        console.log(now.format("dd MMM D YYYY"));
+        console.log(exercise.date);
+        
+
+        let currentTime; 
         if(newExercise.date === null){
-            newExercise.date = now.format('dd MMM D YYYY'); 
-            // console.log(newExercise);
+            currentTime = dayjs().format('ddd MMM D YYYY'); 
+            newExercise.date = currentTime;
+            console.log(currentTime);
+            console.log(newExercise.date);
         }
+
+        currentTime = exercise.date;
         
         // Tu Feb 23 2021
         try{
@@ -69,9 +76,10 @@ module.exports = {
             // console.log(user);
             user.log.push(newExercise)
             // console.log(newExercise);
+            console.log(user);
             user.save();
-            let testing = {_id:user._id,username:user.username, description:newExercise.description, duration:newExercise.duration, date:newExercise.date};
-            console.log(testing);
+            let testing = {_id:user._id,username:user.username, description:newExercise.description, duration:newExercise.duration, date:currentTime};
+            // console.log(testing);
             return testing;
         } catch(error){;
             throw error
