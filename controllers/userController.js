@@ -48,7 +48,8 @@ module.exports = {
             throw error
         }
 
-    },
+    },//{"_id":"603541cae2f17305e4681c8c","username":"maxipad1hh",
+      //"date":"Tue Feb 23 2021","duration":60,"description":"Horror Phase 2"}
     createExercise: async(exercise)=>{
         const now = dayjs();
         const newExercise = new ExerciseModel({
@@ -59,16 +60,19 @@ module.exports = {
         console.log(now.format("dd MMM D YYYY"));
         if(newExercise.date === null){
             newExercise.date = now.format('dd MMM D YYYY'); 
-            console.log(newExercise);
+            // console.log(newExercise);
         }
         
         // Tu Feb 23 2021
         try{
             const user = await UserModel.findOne({_id: exercise.userId})
+            // console.log(user);
             user.log.push(newExercise)
+            // console.log(newExercise);
             user.save();
-            
-            return user;
+            let testing = {_id:user._id,username:user.username, description:newExercise.description, duration:newExercise.duration, date:newExercise.date};
+            console.log(testing);
+            return testing;
         } catch(error){;
             throw error
         }
