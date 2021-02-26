@@ -9,6 +9,8 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 
 
+//{"username":"test0","_id":"6039178f299ab8d5fa22d0d6"}
+
 module.exports = {
     createUser: async(req,res) => {
         
@@ -57,30 +59,28 @@ module.exports = {
             duration: exercise.duration,
             date: exercise.date
         })
-        console.log(exercise.date);
-        
 
-        let currentTime; 
+        
+         let currentTime;
+        if(newExercise.date != null){
+            let dateFromRequest = dayjs(exercise.date).format('ddd MMM D YYYY');
+            currentTime= dateFromRequest;
+            
+        }
+
         if(newExercise.date === null){
             currentTime = dayjs().format('ddd MMM D YYYY'); 
             newExercise.date = currentTime;
-            console.log(currentTime);
-            console.log(newExercise.date);
         }
 
-        currentTime = exercise.date;
-        
+
         // Tu Feb 23 2021
         try{
             const user = await UserModel.findOne({_id: exercise.userId})
-            // console.log(user);
             user.log.push(newExercise)
-            // console.log(newExercise);
-            console.log(user);
             user.save();
-            let testing = {_id:user._id,username:user.username, description:newExercise.description, duration:newExercise.duration, date:currentTime};
-            // console.log(testing);
-            return testing;
+            let exerciseAdded = {_id:user._id,username:user.username, description:newExercise.description, duration:newExercise.duration, date:currentTime};
+            return exerciseAdded;
         } catch(error){;
             throw error
         }
