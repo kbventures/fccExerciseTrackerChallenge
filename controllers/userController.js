@@ -79,7 +79,7 @@ module.exports = {
             const user = await UserModel.findOne({_id: exercise.userId})
             user.log.push(newExercise)
             user.save();
-            let exerciseAdded = {_id:user._id,username:user.username, description:newExercise.description, duration:newExercise.duration, date:currentTime};
+            let exerciseAdded = {_id:user._id,username:user.username, date:currentTime, duration:newExercise.duration ,description:newExercise.description};
             return exerciseAdded;
         } catch(error){;
             throw error
