@@ -7,4 +7,6 @@ const exerciseSchema = mongoose.Schema({
     date: {type: Date}
 })
 
+//     date: {type: Date, default: new Date()}
+
 module.exports= mongoose.model('Exercise', exerciseSchema);

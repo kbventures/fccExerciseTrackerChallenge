@@ -21,10 +21,31 @@ router.post('/api/exercise/add', async(req,res)=>{
 
 // exercise log stub 
 // /api/exercise/log?userId=603e50947bd9ef062c3ed3d1
+// will return
+/* 
+{"_id":"604b9ce76c1ac605e6029387",
+"username":"asdfzili",
+"count":3,"log":
+[{"description":"Test1",
+"duration":60,"date":"Fri Mar 12 2021"},
+{"description":"Test1",
+"duration":60,"date":"Sun Sep 23 1979"},
+{"description":"Test2",
+"duration":61,"date":"Sun Sep 23 1979"}]}
+*/
+
 router.get('/api/exercise/log', async(req,res)=>{
-    console.log(req.query);
-    const exerciseLog = await exerciseController.getExerciseLog(req.query);
-    return exerciseLog; 
+
+   
+
+
+    if(req.query.userId === undefined){
+        return res.send('Unknown userId');
+    }
+    const userExerciseLogs = await userController.getUserLogs(req.query);
+    console.log(userExerciseLogs);
+    return res.json(userExerciseLogs);
+  
 })
 
 

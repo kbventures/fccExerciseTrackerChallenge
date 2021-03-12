@@ -50,13 +50,19 @@ module.exports = {
             throw error
         }
 
-    },//{"_id":"603541cae2f17305e4681c8c","username":"maxipad1hh",
-      //"date":"Tue Feb 23 2021","duration":60,"description":"Horror Phase 2"}
+    },
+    getUserLogs: async(query)=>{
 
+        let userId = query.userId;
+        // let fromDate = query.from;
+        // let toDate = query.to; 
+        // let logAmountLimit = query.limit; 
 
-      getUserLogs: async(query)=>{
           try{
-              const logList = await UserModel.findById(query.userId);
+              const user = await UserModel.findById(query.userId);
+              let logListReturnObject = {_id: user._id, username:user.username,count:user.log.length, log: user.log}
+              
+              return logListReturnObject; 
           }catch(error){
               throw error;
           }

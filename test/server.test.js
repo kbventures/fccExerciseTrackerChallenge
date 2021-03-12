@@ -54,7 +54,7 @@ describe('GET all users',()=>{
 describe('POST /api/exercise/add', ()=>{
     it('POST /api/exercise/add with form data userId=_id, description, duration and optionally date', (done)=>{
     let newExercise = {
-        userId:'603e65fc40f8af0d1bef0a7b',
+        userId:'604bd34ecfe63af70c26296b',
         description:'Math Exam',
         duration:'60',
         date: ''
@@ -66,8 +66,8 @@ describe('POST /api/exercise/add', ()=>{
             console.log(res.body);
             expect(res).to.have.status(200);
             expect(res).to.be.an('object');
-            expect(res.body).that.includes.keys("_id","username","description","duration","date");
-            expect(res.body._id).to.equals("603e65fc40f8af0d1bef0a7b");
+            expect(res.body).that.includes.keys('_id','username','description','duration','date');
+            expect(res.body._id).to.equals('604bd34ecfe63af70c26296b');
             done();
         });
     });
@@ -77,10 +77,31 @@ describe('GET /api/exercise/log?userId=_id', ()=>{
     it('GET /api/exercise/log?userId=_id', (done)=>{
     
         chai.request(server)
-        .get('/api/exercise/log?userId=603e65fc40f8af0d1bef0a7b')
+        .get('/api/exercise/log?userId=604bd34ecfe63af70c26296b')
         .end((err,res)=>{
             expect(res).to.have.status(200);
-            expect(res).to.be.an('array');
+            expect(res).to.be.an('object');
+            expect(res.body).that.includes.keys('_id','username','count','log');
+            expect(res.body.log).to.be.an('array');
+            expect(res.body._id).to.equal('604ba567439fff934383d495');
+            expect(res.body.username).to.equal('Test0');
+            done();
+        });
+    });
+});
+
+describe('GET /api/exercise/log?userId=_id&from=fromDate&to=toDate&limit=logMaxEntry', ()=>{
+    it('GET /api/exercise/log?userId=_id&from=fromDate&to=toDate&limit=logMaxEntry', (done)=>{
+    
+        chai.request(server)
+        .get('/api/exercise/log?userId=604bd34ecfe63af70c26296b')
+        .end((err,res)=>{
+            expect(res).to.have.status(200);
+            expect(res).to.be.an('object');
+            expect(res.body).that.includes.keys('_id','username','count','log');
+            expect(res.body.log).to.be.an('array');
+            expect(res.body._id).to.equal('604ba567439fff934383d495');
+            expect(res.body.username).to.equal('Test0');
             done();
         });
     });
