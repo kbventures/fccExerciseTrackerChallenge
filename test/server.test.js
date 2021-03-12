@@ -20,41 +20,41 @@ chai.use(chaiHttp);
 //     });
 // });
 
-// describe('POST NEW username',()=>{
-//     it('POST NEW response should be a an object with username and _id properties and status 200',(done) =>{
-//         let newUserPost = {
-//             username: 'id' + (new Date()).getTime()
-//         }
-//         chai.request(server)
-//             .post('/api/exercise/new-user')
-//             .send(newUserPost)
-//             .end((err,res)=>{
-//                 expect(res).to.have.status(200);
-//                 expect(res).to.be.an('object');
-//                 expect(res.body).that.includes.keys('_id','username');
-//                 expect(res.body.username).to.equals(newUserPost.username);
-//                 done();
-//             });
-//     });
-// });
+describe('POST NEW username',()=>{
+    it('POST NEW response should be a an object with username and _id properties and status 200',(done) =>{
+        let newUserPost = {
+            username: 'id' + (new Date()).getTime()
+        }
+        chai.request(server)
+            .post('/api/exercise/new-user')
+            .send(newUserPost)
+            .end((err,res)=>{
+                expect(res).to.have.status(200);
+                expect(res).to.be.an('object');
+                expect(res.body).that.includes.keys('_id','username');
+                expect(res.body.username).to.equals(newUserPost.username);
+                done();
+            });
+    });
+});
 
-// describe('GET all users',()=>{
-//     it('GET request to api/exercise/users to get an array of all users. Each element in array is an obect containing a users username and _id',
-//     (done)=>{
-//         chai.request(server)
-//             .get('/api/exercise/users')
-//             .end((err,res)=>{
-//                 expect(res).to.have.status(200);
-//                 expect(res.body).to.be.an('array');
-//                 done();
-//             });
-//     })
-// });
+describe('GET all users',()=>{
+    it('GET request to api/exercise/users to get an array of all users. Each element in array is an obect containing a users username and _id',
+    (done)=>{
+        chai.request(server)
+            .get('/api/exercise/users')
+            .end((err,res)=>{
+                expect(res).to.have.status(200);
+                expect(res.body).to.be.an('array');
+                done();
+            });
+    })
+});
 
 describe('POST /api/exercise/add', ()=>{
     it('POST /api/exercise/add with form data userId=_id, description, duration and optionally date', (done)=>{
     let newExercise = {
-        userId:'603547104350e4357480534e',
+        userId:'603e65fc40f8af0d1bef0a7b',
         description:'Math Exam',
         duration:'60',
         date: ''
@@ -67,7 +67,20 @@ describe('POST /api/exercise/add', ()=>{
             expect(res).to.have.status(200);
             expect(res).to.be.an('object');
             expect(res.body).that.includes.keys("_id","username","description","duration","date");
-            expect(res.body._id).to.equals("603547104350e4357480534e");
+            expect(res.body._id).to.equals("603e65fc40f8af0d1bef0a7b");
+            done();
+        });
+    });
+});
+
+describe('GET /api/exercise/log?userId=_id', ()=>{
+    it('GET /api/exercise/log?userId=_id', (done)=>{
+    
+        chai.request(server)
+        .get('/api/exercise/log?userId=603e65fc40f8af0d1bef0a7b')
+        .end((err,res)=>{
+            expect(res).to.have.status(200);
+            expect(res).to.be.an('array');
             done();
         });
     });

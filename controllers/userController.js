@@ -52,6 +52,15 @@ module.exports = {
 
     },//{"_id":"603541cae2f17305e4681c8c","username":"maxipad1hh",
       //"date":"Tue Feb 23 2021","duration":60,"description":"Horror Phase 2"}
+
+
+      getUserLogs: async(query)=>{
+          try{
+              const logList = await UserModel.findById(query.userId);
+          }catch(error){
+              throw error;
+          }
+      },
     createExercise: async(exercise)=>{
      
         const newExercise = new ExerciseModel({

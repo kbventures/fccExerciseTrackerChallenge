@@ -19,6 +19,23 @@ router.post('/api/exercise/add', async(req,res)=>{
     return res.status(200).json(updatedExerciseLise);
 })
 
+// exercise log stub 
+// /api/exercise/log?userId=603e50947bd9ef062c3ed3d1
+router.get('/api/exercise/log', async(req,res)=>{
+    console.log(req.query);
+    const exerciseLog = await exerciseController.getExerciseLog(req.query);
+    return exerciseLog; 
+})
+
+
+
+/*
+    You can make a GET request to /api/exercise/log with a parameter of userId=_id
+    to retrieve a full exercise log of any user. The returned response will be the 
+    user object with a log array of all the exercises added. Each log item has the
+    description, duration, and date properties.
+*/
+
 
 
 
