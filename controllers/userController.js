@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const UserModel = require('../models/user');
-const UserLogModel = require('../models/userLog');
 const ExerciseModel = require('../models/exercise');
 const dayjs = require('dayjs');
 
@@ -44,10 +43,8 @@ module.exports = {
         let fromDate = query.from;
         let toDate = query.to; 
         let logAmountLimit = query.limit; 
-        //
 
-//http://localhost:3000/api/exercise/log?userId=604e72083d5bb46004b448a4&to=1979-09-29
-          try{
+        try {
               const user = await UserModel.findById(userId);
               let log = user.log;
               let logListReturnObject = {_id: user._id, username:user.username,count:user.log.length, log: user.log}
@@ -113,8 +110,6 @@ module.exports = {
             newExercise.date = currentTime;
         }
 
-
-        // Tu Feb 23 2021
         try{
             const user = await UserModel.findOne({_id: exercise.userId})
             user.log.push(newExercise)
@@ -128,11 +123,3 @@ module.exports = {
 
 }
 
-// Tu Feb 23 2021
-
-/*
-You can POST to /api/exercise/add with form data userId=_id,
- description, duration, and optionally date. If no date is supplied,
-  the current date will be used. The response returned will be the user
-   object with the exercise fields added.
-*/

@@ -25,10 +25,3 @@ app.get('/', (req, res) => {
 module.exports = app;
 
 
-
-
-
-/*
-{"username":"kbzzz123","_id":"5ffef4790aa40e05f2b89264"}
-https://exercise-tracker.freecodecamp.rocks/api/exercise/log?userId=5ffef4790aa40e05f2b89264
-*/
