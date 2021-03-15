@@ -42,7 +42,7 @@ describe('GET all users',()=>{
 describe('POST /api/exercise/add', ()=>{
     it('POST /api/exercise/add with form data userId=_id, description, duration and optionally date', (done)=>{
     let newExercise = {
-        userId:'604bd34ecfe63af70c26296b',
+        userId:'604e72083d5bb46004b448a4',
         description:'Math Exam',
         duration:'60',
         date: ''
@@ -51,11 +51,10 @@ describe('POST /api/exercise/add', ()=>{
         .post('/api/exercise/add')
         .send(newExercise)
         .end((err,res)=>{
-            console.log(res.body);
             expect(res).to.have.status(200);
             expect(res).to.be.an('object');
             expect(res.body).that.includes.keys('_id','username','description','duration','date');
-            expect(res.body._id).to.equals('604bd34ecfe63af70c26296b');
+            expect(res.body._id).to.equals('604e72083d5bb46004b448a4');
             done();
         });
     });
@@ -65,14 +64,14 @@ describe('GET /api/exercise/log?userId=_id', ()=>{
     it('GET /api/exercise/log?userId=_id', (done)=>{
     
         chai.request(server)
-        .get('/api/exercise/log?userId=604bd34ecfe63af70c26296b')
+        .get('/api/exercise/log?userId=604e72083d5bb46004b448a4')
         .end((err,res)=>{
             expect(res).to.have.status(200);
             expect(res).to.be.an('object');
             expect(res.body).that.includes.keys('_id','username','count','log');
             expect(res.body.log).to.be.an('array');
-            expect(res.body._id).to.equal('604ba567439fff934383d495');
-            expect(res.body.username).to.equal('Test0');
+            expect(res.body._id).to.equal('604e72083d5bb46004b448a4');
+            expect(res.body.username).to.equal('test0');
             done();
         });
     });
@@ -81,17 +80,15 @@ describe('GET /api/exercise/log?userId=_id', ()=>{
 // /api/exercise/log?userId=604e72083d5bb46004b448a4&from=1979-09-23&to=1979-09-26
 describe('GET /api/exercise/log?userId=_id&from=fromDate&to=toDate&limit=logMaxEntry', ()=>{
     it('GET /api/exercise/log?userId=_id&from=fromDate&to=toDate&limit=logMaxEntry', (done)=>{
-    
         chai.request(server)
-        .get('/api/exercise/log?userId=604bab836c1ac605e6029393&from=1979-09-24&to=1979-09-26')
+        .get('/api/exercise/log?userId=604e72083d5bb46004b448a4&from=1979-09-24&to=1979-09-28&limit=2')
         .end((err,res)=>{
             expect(res).to.have.status(200);
             expect(res).to.be.an('object');
             expect(res.body).that.includes.keys('_id','username','count','log');
             expect(res.body.log).to.be.an('array');
-            expect(res.body._id).to.equal('604ba567439fff934383d495');
-            expect(res.body.username).to.equal('asdfzili1');
-            expect(res.body.username).to.equal('Test0');
+            expect(res.body._id).to.equal('604e72083d5bb46004b448a4');
+            expect(res.body.username).to.equal('test0');
             done();
         });
     });

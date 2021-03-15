@@ -67,13 +67,10 @@ module.exports = {
                             return tempDate >= startDate;
                             }
                         if(fromDate === undefined ){
-                            console.log('test1');
                             return tempDate <= endDate;
                             }
                 })
                 logListReturnObject = {_id: user._id, username:user.username,count:user.log.length, log: dateRangeLog}
-
-                console.log('Date range log',dateRangeLog);
             }
 
 
