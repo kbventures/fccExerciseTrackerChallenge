@@ -90,17 +90,19 @@ describe('GET /api/exercise/log?userId=_id', ()=>{
     });
 });
 
+// /api/exercise/log?userId=604e72083d5bb46004b448a4&from=1979-09-23&to=1979-09-26
 describe('GET /api/exercise/log?userId=_id&from=fromDate&to=toDate&limit=logMaxEntry', ()=>{
     it('GET /api/exercise/log?userId=_id&from=fromDate&to=toDate&limit=logMaxEntry', (done)=>{
     
         chai.request(server)
-        .get('/api/exercise/log?userId=604bd34ecfe63af70c26296b')
+        .get('/api/exercise/log?userId=604bab836c1ac605e6029393&from=1979-09-24&to=1979-09-26')
         .end((err,res)=>{
             expect(res).to.have.status(200);
             expect(res).to.be.an('object');
             expect(res.body).that.includes.keys('_id','username','count','log');
             expect(res.body.log).to.be.an('array');
             expect(res.body._id).to.equal('604ba567439fff934383d495');
+            expect(res.body.username).to.equal('asdfzili1');
             expect(res.body.username).to.equal('Test0');
             done();
         });
@@ -113,7 +115,7 @@ describe('GET /api/exercise/log?userId=_id&from=fromDate&to=toDate&limit=logMaxE
 // https://stackoverflow.com/questions/58745945/mongoose-unique-field-error-message-handling
 
 /*
-
+https://dev.to/itz_giddy/how-to-query-documents-in-mongodb-that-fall-within-a-specified-date-range-using-mongoose-and-node-524a
 https://github.com/academind/node-restful-api-tutorial/blob/05-add-mongodb-and-mongoose/api/routes/products.js
 https://zellwk.com/blog/mongoose-subdocuments/
 https://zellwk.com/blog/mongoose/

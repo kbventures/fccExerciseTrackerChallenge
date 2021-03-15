@@ -9,8 +9,6 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 
 
-//{"username":"test0","_id":"6039178f299ab8d5fa22d0d6"}
-
 module.exports = {
     createUser: async(req,res) => {
         
@@ -18,22 +16,14 @@ module.exports = {
             username: req.body.username,
             log:[]
         })
-       
         try{
-            // console.log(newUser);
             const userExist = await UserModel.findOne({username: req.body.username})
             if(!userExist){
-    
-            // const newUserSaved = 
             await newUser.save();
             const _idAndNameOnly = { username: newUser.username,_id:newUser._id};
-            // console.log(_idAndNameOnly);
-            // console.log(newUser);
             return res.send(_idAndNameOnly); 
         }
-            
             return res.status(400).send({error:'Username already taken'});
-
         } catch (error){
             throw error
         }
@@ -42,26 +32,61 @@ module.exports = {
     getAllUsers: async()=>{
         try{
             const usersList = await UserModel.find({});
-            // console.log(usersList);
             const arrayWith_idsAndNamesOnly = usersList.map(({_id:id,username:user}) => ({id,user}));
-            // console.log(arrayWith_idsAndNamesOnly);
             return usersList;
         } catch(error){
             throw error
         }
-
     },
     getUserLogs: async(query)=>{
 
         let userId = query.userId;
-        // let fromDate = query.from;
-        // let toDate = query.to; 
-        // let logAmountLimit = query.limit; 
+        let fromDate = query.from;
+        let toDate = query.to; 
+        let logAmountLimit = query.limit; 
+        //
 
+//http://localhost:3000/api/exercise/log?userId=604e72083d5bb46004b448a4&to=1979-09-29
           try{
-              const user = await UserModel.findById(query.userId);
+              const user = await UserModel.findById(userId);
+              let log = user.log;
               let logListReturnObject = {_id: user._id, username:user.username,count:user.log.length, log: user.log}
               
+            if(toDate || fromDate){
+
+                var startDate = new Date(fromDate);
+                var endDate = new Date(toDate);
+
+
+                var dateRangeLog = log.filter((a)=>{
+
+                        let tempDate = new Date(a.date); 
+
+                        if(toDate && fromDate){
+                        return tempDate <= endDate && tempDate >= startDate;
+                        }
+                        
+                        if(toDate === undefined ){
+                            return tempDate >= startDate;
+                            }
+                        if(fromDate === undefined ){
+                            console.log('test1');
+                            return tempDate <= endDate;
+                            }
+                })
+                logListReturnObject = {_id: user._id, username:user.username,count:user.log.length, log: dateRangeLog}
+
+                console.log('Date range log',dateRangeLog);
+            }
+
+
+              if(logAmountLimit != undefined){
+                  log.splice(logAmountLimit);
+                  let logListReturnObject = {_id: user._id, username:user.username,count:user.log.length, log: log}
+                  return logListReturnObject; 
+              }
+     
+
               return logListReturnObject; 
           }catch(error){
               throw error;
