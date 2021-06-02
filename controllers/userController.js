@@ -114,9 +114,6 @@ module.exports = {
             // console.log(exercise.body[':_id']); 
             // console.log(exercise.params._id);
 
-            // using callback
-            // Example: Adventure.findOne({ country: 'Croatia' }, function (err, adventure) {});
-            // for testing
             const user = await UserModel.findOne({_id: exercise[':_id']});
             console.log(user);
             user.log.push(newExercise)
