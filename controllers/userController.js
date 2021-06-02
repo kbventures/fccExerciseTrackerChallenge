@@ -24,6 +24,7 @@ module.exports = {
         }
             return res.status(400).send({error:'Username already taken'});
         } catch (error){
+            
             throw error
         }
     
