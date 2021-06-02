@@ -17,9 +17,9 @@ router.get('/api/users', async (req, res)=>{
 
 // POST ADD EXERCISE
 router.post('/api/users/:_id/exercises', async(req,res)=>{
-    // console.log(req.body);
-    // console.log(req.body[':_id']);
-    // console.log(req.params._id);
+    console.log(req.body);
+    console.log(req.body[':_id']);
+    console.log(req.params._id);
     const updatedExerciseLise = await userController.createExercise(req.body);
     return res.status(200).json(updatedExerciseLise);
 })
