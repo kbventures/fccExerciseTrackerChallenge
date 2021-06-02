@@ -3,19 +3,23 @@ const router = express.Router();
 const userController = require('../../controllers/userController');
 
 
-// Add a new user
+// POST Add a new user
 router.post('/api/users', async (req,res)=>{
     const newUser = await userController.createUser(req,res);
     return newUser;
 })
 
-// Get all users
+// GET all users
 router.get('/api/users', async (req, res)=>{
     const usersList = await userController.getAllUsers();
     return res.json(usersList);
 })
 
-router.post('/api/exercise/add', async(req,res)=>{
+// POST ADD EXERCISE
+router.post('/api/users/:_id/exercises', async(req,res)=>{
+    // console.log(req.body);
+    // console.log(req.body[':_id']);
+    // console.log(req.params._id);
     const updatedExerciseLise = await userController.createExercise(req.body);
     return res.status(200).json(updatedExerciseLise);
 })
