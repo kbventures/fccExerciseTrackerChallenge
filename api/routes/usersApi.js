@@ -3,12 +3,14 @@ const router = express.Router();
 const userController = require('../../controllers/userController');
 
 
+// Add a new user
 router.post('/api/users', async (req,res)=>{
     const newUser = await userController.createUser(req,res);
     return newUser;
 })
 
-router.get('/api/exercise/users', async (req, res)=>{
+// Get all users
+router.get('/api/users', async (req, res)=>{
     const usersList = await userController.getAllUsers();
     return res.json(usersList);
 })
