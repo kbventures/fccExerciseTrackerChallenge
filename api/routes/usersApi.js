@@ -23,11 +23,13 @@ router.post('/api/users/:_id/exercises', async(req,res)=>{
 
 
 // GET request to /api/users/:_id/logs to retrieve a full exercise log of any user.
-
 router.get('/api/users/:_id/logs', async(req,res)=>{
     if(req.params._id === undefined){
         return res.send('Unknown userId');
     }
+
+    console.log(query);
+    console.log(req.params);
     const userExerciseLogs = await userController.getUserLogs(req.query, req.params);
     return res.json(userExerciseLogs);
 })
