@@ -87,12 +87,12 @@ module.exports = {
               throw error;
           }
       },
-    createExercise: async(exercise)=>{
+    createExercise: async(params, reqBody)=>{
      
         const newExercise = new ExerciseModel({
-            description: exercise.description,
-            duration: exercise.duration,
-            date: exercise.date
+            description: reqBody.description,
+            duration: reqBody.duration,
+            date: reqBody.date
         })
 
         
@@ -114,8 +114,10 @@ module.exports = {
             // console.log(exercise.body[':_id']); 
             // console.log(exercise.params._id);
 
-            const user = await UserModel.findOne({_id: exercise[':_id']});
-            console.log(user);
+            const user = await UserModel.findOne({_id: params._id});
+
+
+            // console.log(user);
             user.log.push(newExercise)
             user.save();
             let exerciseAdded = {_id:user._id,username:user.username, date:new Date(currentTime).toDateString(), duration:newExercise.duration ,description:newExercise.description};

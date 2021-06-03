@@ -8,6 +8,9 @@ mongodb+srv://m001-student:nAO4LZvHN2DnxY8m@sandbox.bvkcb.mongodb.net/fccExercis
 
 
 
+
+
+
 description field is empthy || duration
 Path `description` is required.
 
