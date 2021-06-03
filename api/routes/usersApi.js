@@ -34,3 +34,5 @@ router.get('/api/users/:_id/logs', async(req,res)=>{
     return res.json(userExerciseLogs);
 })
 
+
+module.exports = router;
