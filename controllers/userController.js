@@ -88,17 +88,17 @@ module.exports = {
           }
       },
     createExercise: async(params, reqBody)=>{
-     
+ 
         const newExercise = new ExerciseModel({
             description: reqBody.description,
             duration: reqBody.duration,
             date: reqBody.date
         })
 
-        
+  
          let currentTime;
         if(newExercise.date != null){
-            let dateFromRequest = dayjs(exercise.date).format('ddd MMM D YYYY');
+            let dateFromRequest = dayjs(reqBody.date).format('ddd MMM D YYYY');
             currentTime= dateFromRequest;
             
         }
@@ -109,10 +109,7 @@ module.exports = {
         }
 
         try{
-            // console.log(exercise);
-            // console.log(exercise[':_id']); 
-            // console.log(exercise.body[':_id']); 
-            // console.log(exercise.params._id);
+            console.log(params._id);
 
             const user = await UserModel.findOne({_id: params._id});
 
