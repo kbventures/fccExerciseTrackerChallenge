@@ -38,9 +38,9 @@ module.exports = {
             throw error
         }
     },
-    getUserLogs: async(query)=>{
+    getUserLogs: async(query, params)=>{
 
-        let userId = query.userId;
+        let userId = params._id;
         let fromDate = query.from;
         let toDate = query.to; 
         let logAmountLimit = query.limit; 
