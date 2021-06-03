@@ -1,3 +1,4 @@
+// Free code camp article snippet
 require('dotenv').config()
 
 const mongoose = require('mongoose');

@@ -34,39 +34,3 @@ router.get('/api/users/:_id/logs', async(req,res)=>{
     return res.json(userExerciseLogs);
 })
 
-
-
-
-
-/*
-    You can make a GET request to /api/exercise/log with a parameter of userId=_id
-    to retrieve a full exercise log of any user. The returned response will be the 
-    user object with a log array of all the exercises added. Each log item has the
-    description, duration, and date properties.
-*/
-
-
-
-
-// {"_id":"5ffd82a8c5b5cf05d0805d5d","username":"kbzzz","date":"Tue Jan 26 2021","duration":60,"description":"ffffff"}
-// {"username":"tizzy1234","_id":"60301e42e2f17305e4681ab2"}
-// https://exercise-tracker.freecodecamp.rocks/api/exercise/log?userId=603036bbe2f17305e4681ada
-
-// {"_id":"603036bbe2f17305e4681ada","username":"tizzy12345","count":3,
-// "log":[{"description":"Math","duration":60,"date":"Fri Feb 19 2021"},
-// {"description":"English","duration":60,"date":"Fri Feb 19 2021"},
-// {"description":"testing","duration":60,"date":"Fri Feb 19 2021"}]}
-
-
-/*
-You can POST to /api/exercise/add with form data 
-userId=_id,description, duration, and optionally date. If no date is
-supplied, the current date will be used. The response
-returned will be the user object with the exercise fields 
-added.
-*/
-
-
-// https://medium.com/@vcarl/handling-errors-with-async-await-and-promises-cd2fea534f08#:~:text=With%20async%2Fawait%2C%20a%20common,exceptions%20thrown%20will%20be%20caught.
-
-module.exports = router;
